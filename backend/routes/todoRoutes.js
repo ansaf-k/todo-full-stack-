@@ -12,6 +12,6 @@ const routes = express.Router();
 
 
 routes.route("/").get(protect, getTodos).post(protect, addTodo);
-routes.route("/:id").delete(deleteTodo).get(getTodo).patch(updateTodo);
+routes.route("/:id").delete(protect, deleteTodo).get(protect,getTodo).patch(protect, updateTodo);
 
 export default routes;
