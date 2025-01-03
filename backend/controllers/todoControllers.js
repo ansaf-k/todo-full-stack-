@@ -18,7 +18,6 @@ const getTodos = async (req, res) => {
 };
 
 const getTodo = async (req, res) => {
-  console.log("ss");
   
   const todo = await Todo.findById(req.params.id);
 
