@@ -15,6 +15,11 @@ const todoSchema = mongoose.Schema({
     required: true,
     default: "pending",
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 const Todo = mongoose.model("Todo", todoSchema);

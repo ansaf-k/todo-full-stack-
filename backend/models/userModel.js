@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

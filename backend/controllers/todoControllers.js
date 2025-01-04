@@ -6,19 +6,19 @@ const addTodo = async (req, res) => {
   const todo = await Todo.create({
     title,
     desc,
+    user: req.user._id,
   });
 
   res.json(todo);
 };
 
 const getTodos = async (req, res) => {
-  const todos = await Todo.find();
+  const todos = await Todo.find({ user: req.user._id });
 
   res.json(todos);
 };
 
 const getTodo = async (req, res) => {
-  
   const todo = await Todo.findById(req.params.id);
 
   res.json(todo);
@@ -36,7 +36,6 @@ const updateTodo = async (req, res) => {
   const { id } = req.params;
 
   const { title, desc, status } = req.body;
-  console.log(req.body);
 
   const todo = await Todo.findById(id);
 

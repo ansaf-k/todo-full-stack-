@@ -95,6 +95,5 @@ const TodoList = ({ todos }) => {
 
 TodoList.propTypes = {
   todos: PropTypes.array.isRequired,
-  getTodos: PropTypes.func.isRequired
 }
 export default TodoList
