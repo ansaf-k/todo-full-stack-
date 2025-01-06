@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import asyncHandler from "../middlewares/asyncHandler.js";
 
 const registerUser = async (req, res, next) => {
 
@@ -39,36 +40,33 @@ const registerUser = async (req, res, next) => {
     }
 };
 
-const authUser = async (req, res, next) => {
+const authUser = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email });
-        if (User && (await user.matchPassword(password))) {
-            
-            let token = jwt.sign({ userId: user._id }, "12345", {
-                expiresIn: "1d",
-            });
 
-            res.cookie("jwt", token, {
-                httpOnly: true, //after login , jwt is stored in the frontend's cookies as httponly cookies request after login will be attached with the jwt token stored in the cookies.
-                secure: false,
-                sameSite: "strict", //prevents csrf attacks
-                maxAge: 60 * 60 * 1000, //1 day in milliseconnds
-            })
+    const user = await User.findOne({ email });
+    if (User && (await user.matchPassword(password))) {
 
-            res.status(200).json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-            })
-        } else {
-            res.status(400);
-            throw new Error("Invalid Email or Password");
-        }
-    } catch (err) {
-        next(err);
+        let token = jwt.sign({ userId: user._id }, JWT_SECRET_KEY, {
+            expiresIn: "1d",
+        });
+
+        res.cookie("jwt", token, {
+            httpOnly: true, //after login , jwt is stored in the frontend's cookies as httponly cookies request after login will be attached with the jwt token stored in the cookies.
+            secure: false,
+            sameSite: "strict", //prevents csrf attacks
+            maxAge: 60 * 60 * 1000, //1 day in milliseconnds
+        })
+
+        res.status(200).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+        })
+    } else {
+        res.status(400);
+        throw new Error("Invalid Email or Password");
     }
-};
+});
 
 const logout = (req, res) => {
     res.cookie("jwt", "", {
@@ -76,7 +74,7 @@ const logout = (req, res) => {
         expiresIn: new Date(0),
     });
 
-    res.status(200).json({ message : " Logged Out Successfully"});
+    res.status(200).json({ message: " Logged Out Successfully" });
 };
 
-export { registerUser, authUser, logout}
+export { registerUser, authUser, logout }
