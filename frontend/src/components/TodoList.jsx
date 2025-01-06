@@ -10,12 +10,7 @@ const TodoList = ({ todos }) => {
   const [deleteTodo] = useDeleteTodoMutation();
 
   const deleteHandler = async (id) => {
-
     await deleteTodo({ id });
-
-    // await axios.delete(`/api/todo/${id}`);
-    // toast.error("Deleted successfully")
-    // getTodos();
   }
 
   const completeHandler = async (id) => {

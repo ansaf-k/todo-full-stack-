@@ -11,7 +11,7 @@ const HomePage = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4">
         <div className="w-full max-w-3xl bg-white shadow-xl rounded-lg overflow-hidden">
           <header className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-center p-6">
