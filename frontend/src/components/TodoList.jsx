@@ -10,10 +10,15 @@ const TodoList = ({ todos }) => {
   const [deleteTodo] = useDeleteTodoMutation();
 
   const deleteHandler = async (id) => {
-    await deleteTodo({ id });
+   try {
+    await deleteTodo({ id }).unwrap();
+    toast.success("Todo deleted successfully"); 
+   } catch (error) {
+    toast.error(error.data.message);
+   }
   }
 
-  const completeHandler = async (id) => {
+  const completeHandler = async(id) => {
     await updateTodo({ status: "completed", id });
     toast.success("Marked as completed")
   }

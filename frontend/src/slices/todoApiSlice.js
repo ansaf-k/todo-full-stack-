@@ -25,7 +25,6 @@ const todoApiSlice = apiSlice.injectEndpoints({
             query: (data) => ({
                 url: `/api/todo/${data.id}`,
                 method: "DELETE",
-                body: data,
             }),
             invalidatesTags: ["Todos"],
         }),

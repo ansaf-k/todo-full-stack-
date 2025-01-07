@@ -26,18 +26,17 @@ const getTodo = asyncHandler(async (req, res) => {
 });
 
 const deleteTodo = asyncHandler(async (req, res) => {
-  const { id } = req.params;
-  const todos = Todo.findById(id);
-  if(String(req.user._id) == String(todos.user)){
-    await todos.findByIdAndDelete(id);
+  const { id }  = req.params;
+  const todos = await Todo.findById(id);
+  
+  if (String(req.user._id) === String(todos.user)) {
+
+    await Todo.findByIdAndDelete(id);
     res.send('todo delete successfully');
-  }else {
+    
+  } else {
     throw new Error('no authorized,')
   }
-
-  await Todo.findByIdAndDelete(id);
-
-  res.send("deleted successfully");
 });
 
 const updateTodo = asyncHandler(async (req, res) => {

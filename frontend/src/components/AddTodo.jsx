@@ -1,10 +1,9 @@
-import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "./Loader";
 import { useAddTodoMutation } from "../slices/todoApiSlice";
 
-const AddTodo = ({ getTodos }) => {
+const AddTodo = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   // const [isLoading, setIsLoading] = useState(false);
@@ -16,10 +15,6 @@ const AddTodo = ({ getTodos }) => {
 
     await addTodo({ title, desc });
 
-    // setIsLoading(true);
-    // await axios.post("/api/todo", { title, desc });
-    // setIsLoading(false);
-    // getTodos();
     setDesc("");
     setTitle("");
     toast.success("added successfully");
