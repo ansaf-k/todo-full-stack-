@@ -54,7 +54,7 @@ const authUser = asyncHandler(async (req, res, next) => {
             httpOnly: true, //after login , jwt is stored in the frontend's cookies as httponly cookies request after login will be attached with the jwt token stored in the cookies.
             secure: false,
             sameSite: "strict", //prevents csrf attacks
-            maxAge: 60 * 60 * 1000, //1 day in milliseconnds
+            maxAge: 24 * 60 * 60 * 1000, //1 day in milliseconnds
         })
 
         res.status(200).json({

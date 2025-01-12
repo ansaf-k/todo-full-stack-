@@ -12,7 +12,7 @@ const protect = async (req, res, next) => {
                 next();
             } catch (error) {
                 res.status(401);
-                throw new Error("NOt Authorized Invalid Token");
+                throw new Error("Not Authorized Invalid Token");
             }
         }
         else {

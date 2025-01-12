@@ -21,7 +21,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/todo", todoRoutes);
 app.use("/api/users", userRoutes)
-
 app.use(notFound);
 app.use(errorHandler);
 

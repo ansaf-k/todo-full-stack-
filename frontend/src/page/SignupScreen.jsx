@@ -18,7 +18,7 @@ const SignUpScreen = () => {
             setEmail("");
             setPassword("");
             toast.success("successfully registered");
-            navigate("/");
+            navigate("/login");
         } catch (error) {
             toast.error(error.data.message);
         }

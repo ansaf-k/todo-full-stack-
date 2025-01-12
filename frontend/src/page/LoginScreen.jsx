@@ -11,7 +11,7 @@ function LoginScreen() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const  { userInfo } = useSelector(state => state.auth)
+  const { userInfo } = useSelector(state => state.auth)
 
   const [login] = useAuthUserMutation();
 
